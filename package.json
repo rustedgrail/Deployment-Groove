@@ -1,0 +1,29 @@
+{
+    "name": "Deployer Groove"
+    , "author": "David Newell"
+    , "version": "0.0.1"
+    , "license": "MIT"
+    , "description": "A utility to simply concatenate and minify files for production, without having a buildstep in development."
+    , "dependencies": {
+        "uglify-js": "*"
+        , "optparse": "*"
+        , "handlebars": "*"
+        , "jshint": "*"
+    }
+    , "devDependencies": {
+        "coffee-script": "*"
+        , "jasmine-node": "*"
+    }
+    , "scripts": {
+        "test": "jasmine-node --coffee utilities.spec.coffee"
+    }
+    , "bin": {
+        "dg": "./deploy.coffee"
+    }
+    , "main": "./utilities.coffee"
+    , "repository": {
+        "type": "git"
+        , "url": "https://github.com/rustedgrail/Concat-and-Minify.git"
+    }
+    , "keywords": ["deploy", "concatinate", "minify"]
+}
