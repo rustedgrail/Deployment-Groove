@@ -8,11 +8,11 @@
         "uglify-js": "*"
         , "optparse": "*"
         , "handlebars": "*"
+        , "coffee-script": "*"
         , "jshint": "*"
     }
     , "devDependencies": {
-        "coffee-script": "*"
-        , "jasmine-node": "*"
+        "jasmine-node": "*"
     }
     , "scripts": {
         "test": "jasmine-node --coffee utilities.spec.coffee"
