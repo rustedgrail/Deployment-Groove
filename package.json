@@ -16,6 +16,7 @@
     }
     , "scripts": {
         "test": "jasmine-node --coffee utilities.spec.coffee"
+        , "prepublish": "mkdir lib && coffee -o lib/ -c *.coffee"
     }
     , "bin": {
         "dg": "./deploy.coffee"
