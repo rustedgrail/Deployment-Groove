@@ -1,5 +1,6 @@
 fs = require 'fs'
 path = require 'path'
+acorn = require 'acorn'
 
 filesSeen = {}
 
@@ -15,7 +16,7 @@ exports.replaceRequires = (input) ->
     output = []
     files = p1.match(/[^'",\s]+/g)
     for file in files
-      fullPath = path.resolve '../..', file
+      fullPath = path.resolve file
       if !filesSeen[fullPath]
         filesSeen[fullPath] = true
         data = fs.readFileSync(fullPath, 'utf-8')

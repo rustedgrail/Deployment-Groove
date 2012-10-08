@@ -1,1 +1,1 @@
-require('bin/deploy/specs/testEnd');
+require('specs/testEnd');
