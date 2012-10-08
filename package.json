@@ -1,7 +1,11 @@
 {
-    "name": "Deployment_Groove"
-    , "author": "David Newell <beta@alumni.rice.edu>"
-    , "version": "0.0.1"
+    "name": "deployment_groove"
+    , "author": {
+        "name": "David Newell"
+        , "email": "beta@alumni.rice.edu>"
+        , "url": "https://github.com/rustedgrail"
+    }
+    , "version": "0.0.2"
     , "license": "MIT"
     , "description": "A utility to simply concatenate and minify files for production, without having a buildstep in development."
     , "dependencies": {
@@ -19,7 +23,7 @@
         , "prepublish": "./prePublish"
     }
     , "bin": {
-        "dg": "./deploy.coffee"
+        "dg": "./bin/deploy.coffee"
     }
     , "main": "./utilities.coffee"
     , "repository": {
