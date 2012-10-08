@@ -1,0 +1,5 @@
+#!/usr/env/bash
+
+mkdir lib
+coffee -o lib/ -c src/*.coffee
+coffee -c bin/deploy.coffee
