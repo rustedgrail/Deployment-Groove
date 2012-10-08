@@ -1,4 +1,5 @@
 *.swp
+.c9revisions
 node_modules
 lib
 npm-debug.log
