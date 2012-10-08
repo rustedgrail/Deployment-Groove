@@ -2,8 +2,7 @@ optparse = require 'optparse'
 utilities = require './utilities'
 
 switches = [
-  ['-v', '--version NUMBER', 'Version of Widget Core']
-  , ['-o', '--output FILENAME', 'Output file for concatenated files']
+  ['-o', '--output FILENAME', 'Output file for concatenated files']
   , ['-u', '--uncompressed', 'Do not minify or gzip the output']
   , ['-s', '--startFilename FILENAME', 'Include a file at the start of the output']
   , ['-e', '--endFilename FILENAME', 'Include a file at the end of the output']
@@ -15,7 +14,6 @@ switches = [
 ]
 
 options =
-  coreFilename: ""
   output: ''
   writeFunction: utilities.minifiedWrite
   controller: false
@@ -24,11 +22,6 @@ options =
   lint: false
   merchant: false
   base: false
-
-getVersion = (num) ->
-  folder = if num > 1 then "/v#{num}" else ''
-  filename = if num == 0 then 'core.uncompressed.js' else 'core-model.uncompressed.js'
-  "../widget_core#{folder}/#{filename}"
 
 parser = new optparse.OptionParser(switches)
 
@@ -45,9 +38,6 @@ parser.on 1, (name) ->
 
 parser.on 'output', (opt, name) ->
   options.output = name
-
-parser.on 'version', (opt, num) ->
-  options.coreFilename = getVersion(num)
 
 parser.on 'uncompressed', ->
   options.writeFunction = utilities.uncompressedWrite

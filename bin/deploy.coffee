@@ -1,9 +1,9 @@
 #!/usr/bin/env coffee
 
 fs = require 'fs'
-utilities = require './utilities'
+utilities = require '../src/utilities'
 path = require 'path'
-options = require('./parser').options
+options = require('../src/parser').options
 
 if options.lint
   readFunc = (filename) ->
@@ -24,9 +24,6 @@ if options.merchant
 
 if options.startFilename
   output += readFunc options.startFilename
-
-if options.coreFilename
-  output += readFunc options.coreFilename
 
 if options.base
   output += utilities.requiredFiles options.lint
