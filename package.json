@@ -1,6 +1,6 @@
 {
-    "name": "Deployer_Groove"
-    , "author": "David Newell"
+    "name": "Deployment_Groove"
+    , "author": "David Newell <beta@alumni.rice.edu>"
     , "version": "0.0.1"
     , "license": "MIT"
     , "description": "A utility to simply concatenate and minify files for production, without having a buildstep in development."
@@ -15,8 +15,8 @@
         "jasmine-node": "*"
     }
     , "scripts": {
-        "test": "jasmine-node --coffee utilities.spec.coffee"
-        , "prepublish": "mkdir lib && coffee -o lib/ -c *.coffee"
+        "test": "jasmine-node --coffee specs/utilities.spec.coffee"
+        , "prepublish": "./prePublish"
     }
     , "bin": {
         "dg": "./deploy.coffee"
