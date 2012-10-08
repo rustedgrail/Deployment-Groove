@@ -8,11 +8,11 @@ options = require('../src/parser').options
 if options.lint
   readFunc = (filename) ->
     utilities.hint filename
-    utilities.addFileToList "#{filename}"
+    utilities.addFileToList path.resolve filename
     utilities.replaceRequires "#{fs.readFileSync(filename, 'utf-8')}\n"
 else
   readFunc = (filename) ->
-    utilities.addFileToList path.join(process.cwd(), filename)
+    utilities.addFileToList path.resolve filename
     utilities.replaceRequires "#{fs.readFileSync(filename, 'utf-8')}\n"
 
 output = "//#{JSON.stringify options}\n"
