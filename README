@@ -1,7 +1,7 @@
 Deployer Groove makes it easy to concatenate multiple javascripts in order without having a build step in development.  Put the line 
 
 ```javascript
-require(<path to file>);
+require(<path to file>, [<path to file>, <path to file>]);
 ```
 
 in your javascript files.  When you run 
@@ -23,6 +23,5 @@ Options
 
 Ordergroove specific options
 It is not recommended that you use these options
--v --version
 -m --merchant
 -b --base
