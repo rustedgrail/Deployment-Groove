@@ -47,11 +47,4 @@ describe 'replacing require with files', ->
             require('specs/testFile');
             """
 
-    expected = "//require('specs/testFile');\n\"worked\"\n//endRequire;\n\n"
-    expect(utilities.replaceRequires(input)).toBe expected
-
-  it 'delimites the requires with comments', ->
-    input = 'require("specs/testFile");'
-    actual = utilities.replaceRequires(input)
-    expect(actual).toContain "//require('specs/testFile');"
-    expect(actual).toContain "//endRequire;"
+    expect(utilities.replaceRequires(input)).toBe '"worked";'
