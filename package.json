@@ -14,7 +14,6 @@
         , "handlebars": "*"
         , "coffee-script": "*"
         , "jshint": "*"
-        , "acorn": "*"
     }
     , "devDependencies": {
         "jasmine-node": "*"
