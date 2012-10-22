@@ -9,7 +9,9 @@ readFile = (file) ->
   fullPath = path.resolve file
   if !replacer.seenFile(fullPath)
     replacer.addFileToList(fullPath)
-    data = fs.readFileSync(fullPath, 'utf-8')
+    fs.readFileSync(fullPath, 'utf-8')
+  else
+    ''
 
 exports.require = (files) ->
   output = []
