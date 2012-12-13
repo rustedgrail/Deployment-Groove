@@ -34,4 +34,4 @@ exports.seenFile = (file) ->
   filesSeen[file]
 
 exports.replaceRequires = (input) ->
-  uglify.gen_code traverseTree parser.parse input
+  uglify.gen_code(traverseTree(parser.parse(input)), beautify: true)

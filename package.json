@@ -9,7 +9,7 @@
     , "license": "MIT"
     , "description": "A utility to simply concatenate and minify files for production, without having a buildstep in development."
     , "dependencies": {
-        "uglify-js": "*"
+        "uglify-js": "1.3.4"
         , "optparse": "*"
         , "handlebars": "*"
         , "coffee-script": "*"
@@ -28,7 +28,7 @@
     , "main": "./utilities.coffee"
     , "repository": {
         "type": "git"
-        , "url": "https://github.com/rustedgrail/Concat-and-Minify.git"
+        , "url": "https://github.com/rustedgrail/Deployment-Groove.git"
     }
     , "keywords": ["deploy", "concatinate", "minify"]
 }
