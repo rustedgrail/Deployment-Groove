@@ -7,7 +7,7 @@ options = require('../src/parser').options
 
 readFunc = (filename) ->
   utilities.addFileToList path.resolve filename
-  utilities.replaceRequires "#{fs.readFileSync(filename, 'utf-8')}\n"
+  utilities.replaceRequires "#{fs.readFileSync(filename, 'utf-8')}\n", options.preprocessor
 
 if options.lint
   oldRead = readFunc

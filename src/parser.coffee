@@ -12,5 +12,6 @@ options =
   files: args._
   lint: args.lint || args.l
   writeFunction: if args.uncompressed || args.u then utilities.uncompressedWrite else utilities.minifiedWrite
+  preprocessor: args.preprocessor || args.p
 
 exports.options = options

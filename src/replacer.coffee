@@ -33,5 +33,7 @@ exports.addFileToList = (file) ->
 exports.seenFile = (file) ->
   filesSeen[file]
 
-exports.replaceRequires = (input) ->
+exports.replaceRequires = (input, preprocessor) ->
+  if preprocessor
+    preprocessFuncs = require "#{process.cwd()}/#{preprocessor}"
   uglify.gen_code(traverseTree(parser.parse(input)), beautify: true)
