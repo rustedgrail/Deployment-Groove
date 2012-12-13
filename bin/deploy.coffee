@@ -5,31 +5,20 @@ utilities = require '../src/utilities'
 path = require 'path'
 options = require('../src/parser').options
 
+readFunc = (filename) ->
+  utilities.addFileToList path.resolve filename
+  utilities.replaceRequires "#{fs.readFileSync(filename, 'utf-8')}\n"
+
 if options.lint
+  oldRead = readFunc
   readFunc = (filename) ->
     utilities.hint filename
-    utilities.addFileToList path.resolve filename
-    utilities.replaceRequires "#{fs.readFileSync(filename, 'utf-8')}\n"
-else
-  readFunc = (filename) ->
-    utilities.addFileToList path.resolve filename
-    utilities.replaceRequires "#{fs.readFileSync(filename, 'utf-8')}\n"
+    oldRead filename
 
 output = "//#{JSON.stringify options}\n"
 
-if options.merchant
-  dirArray = process.cwd().split '/'
-  merchant_id = dirArray[dirArray.length-1]
-  output = "if(typeof og_settings === 'undefined') { og_settings = {}; }; og_settings.merchant_id = '#{merchant_id}';\n"
-
-if options.startFilename
-  output += readFunc options.startFilename
-
-if options.base
-  output += utilities.requiredFiles options.lint
-
-if options.endFilename
-  output += readFunc options.endFilename
+for file in options.files
+  output += readFunc file
 
 if options.output
   stream = fs.createWriteStream options.output, {flags: 'w'}
