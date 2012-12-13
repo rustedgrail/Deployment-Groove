@@ -12,7 +12,7 @@ exports.requiredFiles = (lint) ->
 exports.hint = (file, config) ->
   jshint.JSHINT file, config
   for error in jshint.JSHINT.data().errors
-    console.log "#{error.raw} on #{error.line} of #{error.evidence}"
+    console.log "#{error.reason} on line #{error.line} of #{error.evidence}"
 
 readAll = (directory, lint) ->
   retValue = ""
