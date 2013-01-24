@@ -47,7 +47,7 @@ describe 'replacing require with files', ->
             require('specs/testFile');
             """
 
-    expect(utilities.replaceRequires(input)).toBe '"worked";'
+    expect(utilities.replaceRequires(input)).toBe "'worked';"
 
   it 'accepts variables in the require statment', ->
     input = """
@@ -55,4 +55,4 @@ describe 'replacing require with files', ->
             require(file);
             """
 
-    expect(utilities.replaceRequires(input)).toContain '"worked";'
+    expect(utilities.replaceRequires(input)).toContain "worked"

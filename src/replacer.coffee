@@ -1,33 +1,50 @@
-{parser, uglify} = require 'uglify-js'
+escodegen = require 'escodegen'
+parser = require 'esprima'
 
 preprocessFuncs = require './preprocessors'
 
 filesSeen = {}
 recurseDeeper =
-  toplevel: true
-  stat: true
+  Program: 'body'
 
 variables = {}
 
-traverseTree = (parsedInput) ->
-  if typeof parsedInput[0] == 'string'
-    if parsedInput[0] == 'call'
-      if typeof preprocessFuncs[parsedInput[1][1]] == 'function'
-        args = []
-        for argArray of parsedInput[2]
-          args.push variables[parsedInput[2][argArray][1]] || parsedInput[2][argArray][1]
+handleExpression = (expressionStatement) ->
+  expression = expressionStatement.expression
+  if expression.type == 'CallExpression'
+    if typeof preprocessFuncs[expression.callee.name] == 'function'
+      args = []
+      retValue = []
+      for argument in expression.arguments
+        if argument.type == 'Identifier'
+          args.push variables[argument.name]
+        else if argument.type == 'Literal'
+          args.push argument.value
+        else
+          args.push argument
+      for expression in parser.parse(preprocessFuncs[expression.callee.name](args)).body
+        retValue.push expression
+      return retValue
+  expressionStatement
 
-        console.log args
-        return parser.parse(preprocessFuncs[parsedInput[1][1]](args))
-    else if parsedInput[0] == 'var'
-      for variable in parsedInput[1]
-        variables[variable[0]] = variable[1][1]
-        console.log variables
-    else if recurseDeeper[parsedInput[0]]
-      parsedInput[1] = traverseTree parsedInput[1]
-  else
-    for key of parsedInput
-      parsedInput[key] = traverseTree parsedInput[key]
+traverseTree = (parsedInput) ->
+  if Array.isArray(parsedInput)
+    newInput = []
+    for expression in parsedInput
+      newExpression = traverseTree expression
+      if Array.isArray(newExpression)
+        for newLine in newExpression
+          newInput.push newLine
+      else
+        newInput.push newExpression
+    return newInput
+  else if parsedInput.type == 'ExpressionStatement'
+    return handleExpression(parsedInput)
+  else if parsedInput.type == 'VariableDeclaration'
+    for declaration in parsedInput.declarations
+      variables[declaration.id.name] = declaration.init.value
+  else if recurseDeeper[parsedInput.type]
+    parsedInput[recurseDeeper[parsedInput.type]] = traverseTree parsedInput[recurseDeeper[parsedInput.type]]
 
   parsedInput
 
@@ -43,4 +60,5 @@ exports.seenFile = (file) ->
 exports.replaceRequires = (input, preprocessor) ->
   if preprocessor
     preprocessFuncs = require "#{process.cwd()}/#{preprocessor}"
-  uglify.gen_code(traverseTree(parser.parse(input)), beautify: true)
+  temp = traverseTree(parser.parse(input))
+  escodegen.generate temp
