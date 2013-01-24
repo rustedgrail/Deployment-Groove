@@ -1,9 +1,8 @@
-#!/usr/bin/env coffee
-
 fs = require 'fs'
-utilities = require '../src/utilities'
+utilities = require('../lib/utilities') || require('../src/utilities')
 path = require 'path'
-options = require('../src/parser').options
+parser = require('../lib/parser') || require('../src/parser.js')
+options = parser.options
 
 readFunc = (filename) ->
   utilities.addFileToList path.resolve filename
