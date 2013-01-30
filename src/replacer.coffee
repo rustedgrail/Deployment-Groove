@@ -9,6 +9,18 @@ recurseDeeper =
 
 variables = {}
 
+handleBinaryExpression = (binaryStatement) ->
+  statement = escodegen.generate binaryStatement
+  eval "with (#{JSON.stringify(variables)}) {#{statement}}"
+
+valueTypes =
+  Identifier: (arg) -> variables[arg.name]
+  Literal: (arg) -> arg.value
+  BinaryExpression: handleBinaryExpression
+
+getVal = (value) ->
+  valueTypes[value.type](value)
+
 handleExpression = (expressionStatement) ->
   expression = expressionStatement.expression
   if expression.type == 'CallExpression'
@@ -16,12 +28,7 @@ handleExpression = (expressionStatement) ->
       args = []
       retValue = []
       for argument in expression.arguments
-        if argument.type == 'Identifier'
-          args.push variables[argument.name]
-        else if argument.type == 'Literal'
-          args.push argument.value
-        else
-          args.push argument
+        args.push getVal argument
       for expression in parser.parse(preprocessFuncs[expression.callee.name](args)).body
         retValue.push expression
       return retValue
@@ -42,7 +49,7 @@ traverseTree = (parsedInput) ->
     return handleExpression(parsedInput)
   else if parsedInput.type == 'VariableDeclaration'
     for declaration in parsedInput.declarations
-      variables[declaration.id.name] = declaration.init.value
+      variables[declaration.id.name] = getVal(declaration.init)
   else if recurseDeeper[parsedInput.type]
     parsedInput[recurseDeeper[parsedInput.type]] = traverseTree parsedInput[recurseDeeper[parsedInput.type]]
 
@@ -60,5 +67,5 @@ exports.seenFile = (file) ->
 exports.replaceRequires = (input, preprocessor) ->
   if preprocessor
     preprocessFuncs = require "#{process.cwd()}/#{preprocessor}"
-  temp = traverseTree(parser.parse(input))
+  temp = traverseTree parser.parse input
   escodegen.generate temp

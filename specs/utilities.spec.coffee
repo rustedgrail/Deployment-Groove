@@ -56,3 +56,11 @@ describe 'replacing require with files', ->
             """
 
     expect(utilities.replaceRequires(input)).toContain "worked"
+
+  it 'can handle strings being added to variables', ->
+    input = """
+            var file = 'specs';
+            require(file + '/testFile');
+            """
+    expect(utilities.replaceRequires(input)).toContain "worked"
+
