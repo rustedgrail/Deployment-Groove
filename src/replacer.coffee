@@ -3,11 +3,10 @@ parser = require 'esprima'
 
 preprocessFuncs = require './preprocessors'
 
+variables = {}
 filesSeen = {}
 recurseDeeper =
   Program: 'body'
-
-variables = {}
 
 handleBinaryExpression = (binaryStatement) ->
   statement = escodegen.generate binaryStatement
