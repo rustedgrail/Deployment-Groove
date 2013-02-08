@@ -1,5 +1,3 @@
 mkdir lib
 coffee -o lib/ -c src/*.coffee
-coffee -c bin/deploy.coffee
-chmod +x bin/deploy.js
 npm publish
