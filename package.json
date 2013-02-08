@@ -5,7 +5,7 @@
         , "email": "beta@alumni.rice.edu>"
         , "url": "https://github.com/rustedgrail"
     }
-    , "version": "0.4.1"
+    , "version": "0.4.2"
     , "license": "MIT"
     , "description": "A utility to simply concatenate and minify files for production, without having a buildstep in development."
     , "dependencies": {
@@ -22,12 +22,10 @@
     }
     , "scripts": {
         "test": "jasmine-node --coffee specs/utilities.spec.coffee"
-        , "prepublish": "./prePublish"
     }
     , "bin": {
-        "dg": "node ./bin/deploy.js"
+        "dg": "./bin/deploy.js"
     }
-    , "main": "./utilities.coffee"
     , "repository": {
         "type": "git"
         , "url": "https://github.com/rustedgrail/Deployment-Groove.git"
