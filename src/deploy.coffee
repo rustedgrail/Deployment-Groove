@@ -1,7 +1,7 @@
 fs = require 'fs'
-utilities = require('../lib/utilities') || require('../src/utilities')
+utilities = require('./utilities')
 path = require 'path'
-parser = require('../lib/parser') || require('../src/parser.js')
+parser = require('./parser.js')
 options = parser.options
 
 readFunc = (filename) ->
