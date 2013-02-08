@@ -16,6 +16,7 @@ valueTypes =
   Identifier: (arg) -> variables[arg.name]
   Literal: (arg) -> arg.value
   BinaryExpression: handleBinaryExpression
+  LogicalExpression: handleBinaryExpression
 
 getVal = (value) ->
   valueTypes[value.type](value)
