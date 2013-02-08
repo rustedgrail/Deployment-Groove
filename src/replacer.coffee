@@ -16,9 +16,14 @@ valueTypes =
   Identifier: (arg) -> variables[arg.name]
   Literal: (arg) -> arg.value
   BinaryExpression: handleBinaryExpression
+  LogicalExpression: handleBinaryExpression
 
 getVal = (value) ->
-  valueTypes[value.type](value)
+  try
+    valueTypes[value.type](value)
+  catch e
+    console.log "Error getting value for #{value}"
+    value
 
 handleExpression = (expressionStatement) ->
   expression = expressionStatement.expression

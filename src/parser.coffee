@@ -5,6 +5,7 @@ switches = [
   ['-o', '--output FILENAME', 'Output file for concatenated files']
   , ['-u', '--uncompressed', 'Do not minify or gzip the output']
   , ['-l', '--lint', 'Lint the files and output the results']
+  , ['-p', '--preprocessor FILENAME', 'Use a custom preprocessor file instead of the default']
 ]
 
 options =
