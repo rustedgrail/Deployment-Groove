@@ -24,7 +24,7 @@
         "test": "jasmine-node --coffee specs/utilities.spec.coffee"
     }
     , "bin": {
-        "dg": "./bin/deploy.js"
+        "dg": "./bin/dg.js"
     }
     , "repository": {
         "type": "git"
