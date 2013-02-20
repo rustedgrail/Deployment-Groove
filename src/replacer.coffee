@@ -17,12 +17,14 @@ valueTypes =
   Literal: (arg) -> arg.value
   BinaryExpression: handleBinaryExpression
   LogicalExpression: handleBinaryExpression
+  MemberExpression: handleBinaryExpression
 
 getVal = (value) ->
   try
     valueTypes[value.type](value)
   catch e
-    console.log "Error getting value for #{value}"
+    console.log "Error getting value for #{JSON.stringify(value)}"
+    console.log e
     value
 
 handleExpression = (expressionStatement) ->
@@ -53,6 +55,7 @@ traverseTree = (parsedInput) ->
     return handleExpression(parsedInput)
   else if parsedInput.type == 'VariableDeclaration'
     for declaration in parsedInput.declarations
+      variables[declaration.id.name] = null
       variables[declaration.id.name] = getVal(declaration.init)
   else if recurseDeeper[parsedInput.type]
     parsedInput[recurseDeeper[parsedInput.type]] = traverseTree parsedInput[recurseDeeper[parsedInput.type]]
