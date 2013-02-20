@@ -1,27 +1,19 @@
-Deployer Groove makes it easy to concatenate multiple javascripts in order without having a build step in development.  Put the line 
+Deployer Groove makes it easy to concatenate multiple javascripts in order without having a build step in development.  Put the line
 
 ```javascript
 require(<path from web root to file>, [<path>, <path>]);
 ```
 
-in your javascript files.  When you run 
+in your javascript files.  When you run
 
 ```
-dg <path to javascript> <output file>
+dg <path to javascript> [<path>, <path>]
 ```
 
 all the require calls will be replaced with the javascript file.  To remove the build step for development, include the function defined in header.js in your javascript, updating staticUrl with the web root path.
 
 Options
--o --output - the file to write the output to.  defaults to stdout
+-o --output - the file to write the output to.  Defaults to stdout
 -u --uncompressed - do not compress the output
--s --startFilename FILENAME - a file to include at the start of the output. first non-flag argument will be used
--e --endFilename FILENAME - a file to include at the end of the output. second non-flag argument will be used
--C --config FILENAME - a config file with the options to use
 -l --lint - lint the input files
 -h --help - write the help to stdout and exit
-
-Ordergroove specific options
-It is not recommended that you use these options
--m --merchant
--b --base
