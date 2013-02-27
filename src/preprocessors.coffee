@@ -27,7 +27,7 @@ includeHandlebars = ->
 exports.template = (files) ->
   output = []
 
-  if !handlebarsIncluded and not files[0] == "false"  
+  if !handlebarsIncluded and not (files[0] == "false")  
     output.push includeHandlebars()
 
   output.push('(function() {\n  var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};\n')
