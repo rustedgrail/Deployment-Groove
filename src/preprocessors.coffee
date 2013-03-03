@@ -26,14 +26,13 @@ includeHandlebars = ->
 
 exports.template = (files) ->
   output = []
-
-  if !handlebarsIncluded and not (files[0] == "false")  
+  if !handlebarsIncluded and files[0]
     output.push includeHandlebars()
 
   output.push('(function() {\n  var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};\n')
   for file in files
+    continue if not file
     fullPath = path.join "#{__dirname}/../..", file
-    continue if !fs.existsSync fullPath
     data = readFile file
     template = path.basename file, '.html'
 
