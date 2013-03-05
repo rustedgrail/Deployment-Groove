@@ -5,7 +5,7 @@
         , "email": "beta@alumni.rice.edu>"
         , "url": "https://github.com/rustedgrail"
     }
-    , "version": "0.4.6"
+    , "version": "0.4.7"
     , "license": "MIT"
     , "description": "A utility to simply concatenate and minify files for production, without having a buildstep in development."
     , "dependencies": {
